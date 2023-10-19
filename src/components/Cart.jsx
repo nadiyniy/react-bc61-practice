@@ -1,5 +1,6 @@
 export const Cart = ({ data }) => {
 	const { name, poster, tag, title, description, postedAt, avatar } = data
+
 	return (
 		<div>
 			<div>
@@ -13,6 +14,7 @@ export const Cart = ({ data }) => {
 			<div>
 				<div>
 					<img src={avatar} alt='Jane Doe' />
+
 					<div>
 						<p>{name}</p>
 						<p>{postedAt}</p>

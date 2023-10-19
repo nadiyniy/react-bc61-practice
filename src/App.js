@@ -3,6 +3,7 @@ import { Header } from './components/Header'
 import data from './assets/article.json'
 import { Statistics } from './components/Statistics'
 import dataStat from './assets/data.json'
+import { CartModules } from './components/CardModules/CartModules'
 
 function App() {
 	console.log(data)
@@ -10,7 +11,7 @@ function App() {
 	return (
 		<div>
 			<Header />
-			<Cart data={data} />
+			<CartModules data={data} />
 			<Statistics dataStat={dataStat} title='Info' />
 		</div>
 	)
