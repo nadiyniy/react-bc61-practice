@@ -1,4 +1,5 @@
 import { StyledImg, StyledInfo, StyledWrapper, StyledWrapperImg } from './CartStyled.styled'
+import { formatDistanceToNow } from 'date-fns'
 
 export const CartStyled = ({ data }) => {
 	const { name, poster, tag, title, description, postedAt, avatar } = data
@@ -19,7 +20,7 @@ export const CartStyled = ({ data }) => {
 
 					<div>
 						<p>{name}</p>
-						<p>{postedAt}</p>
+						<p>{formatDistanceToNow(new Date(postedAt), { addSuffix: true })}</p>
 					</div>
 				</StyledWrapperImg>
 			</div>
