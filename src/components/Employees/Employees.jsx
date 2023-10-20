@@ -2,12 +2,12 @@ import React from 'react'
 import { Employee } from '../Employee/Employee'
 import empcss from './employees.module.css'
 
-export const Employees = ({ dataEmployee }) => {
+export const Employees = ({ dataEmployee, deleteUser }) => {
 	return (
 		<div className={empcss.wrapper}>
 			<ul className={empcss.list}>
 				{dataEmployee.map(item => (
-					<Employee {...item} key={item.id} />
+					<Employee deleteUser={deleteUser} {...item} key={item.id} />
 				))}
 
 				{/* {dataEmployee.map(item => (
