@@ -1,0 +1,13 @@
+.wrapper {
+    width:80%;
+    height: auto;
+    padding: 20px 30px;
+    margin: 0 auto;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
