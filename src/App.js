@@ -13,6 +13,12 @@ import { Filter } from './components/Filter/Filter'
 // 7. Додати можливість обрати відділ для працівника - [x] - Tanya
 // 8. Перемикач між відділами, фільтр наприклад [dev, qa, manager, hr] - [x] - Svitlana
 // 9. Переписати додавання юзера через форму, додати стейт для форми  - [x] - Kyrylo S
+// 10. Додати localStorage - [] -
+// 11. Додати тости для нотіфікацій - [] -
+// 12. Створити модальне вікно - [] -
+// 13. Додати логіку для модального вікна - [] -
+// 14. Додати icons для кнопки edit, delete, serch - [] -
+// 15. Використати модальне вікно для редагування юзера - [] -
 
 class App extends React.Component {
 	state = {
@@ -58,11 +64,6 @@ class App extends React.Component {
 	}
 
 	render() {
-		const arr = [1, 2, 3, 1, 2, 3, 4, 51, 1, 5, 7, 3]
-		const strArr = ['hello react is so beuty']
-		console.log(new Set(...strArr))
-		console.log(arr)
-		console.log([...new Set(arr)])
 		const { employees } = this.state
 		const filteredData = this.getFilterData()
 		const btns = [...new Set(employees.map(user => user.position))]
