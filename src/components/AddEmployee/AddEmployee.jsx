@@ -1,59 +1,38 @@
 import React from 'react'
-import { sayHi } from '../../helpers/sayHi'
 
 export class AddEmployee extends React.Component {
 	state = {
 		name: '',
 		salary: '',
+		position: '',
 	}
 
 	handleChangeInput = ({ target }) => {
 		const { name, value } = target
-		// e.target.value => value
-		// e.target.name => name
 
-		//1 variant
-		// if (e.target.name === 'name') {
-		// 	this.setState({ name: e.target.value })
-		// } else {
-		// 	this.setState({ salary: e.target.value })
-		// }
-
-		//2 variant
-
-		// e.target.name === 'name' ? this.setState({ name: e.target.value }) : this.setState({ salary: e.target.value })
-		//3 variant
-
-		// switch (e.target.name) {
-		// 	case 'name':
-		// 		this.setState({ name: e.target.value })
-		// 		break
-		// 	case 'salary':
-		// 		this.setState({ salary: e.target.value })
-		// 		break
-
-		// 	default:
-		// 		break
-		// }
-
-		//4 variant
 		this.setState({ [name]: value })
+	}
+	handleDepartmentChange = e => {
+		this.setState({ position: e.target.value })
 	}
 	handleOnClick = () => {
 		this.props.addUser(this.state)
-		// sayHi(this.state.name)
 	}
 
 	render() {
 		const { name, salary } = this.state
-
+		// dev, qa, manager, hr
 		return (
 			<div>
 				<input name='name' value={name} onChange={this.handleChangeInput} />
 				<input name='salary' value={salary} onChange={this.handleChangeInput} />
-
+				<select name='department' value={this.state.position} onChange={this.handleDepartmentChange}>
+					<option value='dev'>Dev</option>
+					<option value='qa'>Qa</option>
+					<option value='manager'>Manager</option>
+					<option value='hr'>Hr</option>
+				</select>
 				<button onClick={this.handleOnClick}>Add New Employee</button>
-				<button onClick={() => sayHi(this.state.name)}>SayHello</button>
 			</div>
 		)
 	}
