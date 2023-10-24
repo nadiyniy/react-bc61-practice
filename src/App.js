@@ -13,11 +13,11 @@ import { Filter } from './components/Filter/Filter'
 // 7. Додати можливість обрати відділ для працівника - [x] - Tanya
 // 8. Перемикач між відділами, фільтр наприклад [dev, qa, manager, hr] - [x] - Svitlana
 // 9. Переписати додавання юзера через форму, додати стейт для форми  - [x] - Kyrylo S
-// 10. Додати localStorage - [] -
+// 10. Додати localStorage - [] - Tanya
 // 11. Додати тости для нотіфікацій - [] -
 // 12. Створити модальне вікно - [] -
 // 13. Додати логіку для модального вікна - [] -
-// 14. Додати icons для кнопки edit, delete, serch - [] -
+// 14. Додати icons для кнопки edit, delete, search - [] -
 // 15. Використати модальне вікно для редагування юзера - [] -
 
 class App extends React.Component {
@@ -33,6 +33,8 @@ class App extends React.Component {
 	handleDeleteUser = id => {
 		this.setState(prev => ({ employees: prev.employees.filter(user => user.id !== id) }))
 	}
+	//users?.length
+	//null?.length => undefined
 
 	handleAddNewEmployee = newData => {
 		const { employees } = this.state
@@ -67,7 +69,16 @@ class App extends React.Component {
 		const { employees } = this.state
 		const filteredData = this.getFilterData()
 		const btns = [...new Set(employees.map(user => user.position))]
-
+		// console.log(null?.length)
+		// console.log('12.5'?.toFixed?.())
+		console.log(1 || 0) // 1
+		console.log(0 || true) // true
+		console.log(0 || undefined) // undefined
+		console.log('====================')
+		console.log(1 ?? 0) // 1
+		console.log(0 ?? true) // 0
+		console.log(0 ?? undefined) // 0
+		console.log(0 ?? undefined ?? 1 ?? 1 ?? false) // 0
 		return (
 			<div>
 				<AddEmployee addUser={this.handleAddNewEmployee} />
