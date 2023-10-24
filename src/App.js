@@ -31,15 +31,15 @@ class App extends React.Component {
 	}
 
 	componentDidUpdate(_, prevState) {
-		if (prevState.employees !== this.state.employees) {
-		window.localStorage.setItem('employees', JSON.stringify(this.state.employees))	
-		}
+	
+		window.localStorage.setItem('employees', JSON.stringify(this.state))	
 	}
 
 	componentDidMount() {
 		const savedData = JSON.parse(window.localStorage.getItem('employees'))
-		if (savedData?.length) {
-			this.setState({employees: savedData})
+		// console.log(savedData);
+		if (savedData) {
+			this.setState({...savedData})
 		}
 	}
 
