@@ -13,8 +13,8 @@ import { Filter } from './components/Filter/Filter'
 // 7. Додати можливість обрати відділ для працівника - [x] - Tanya
 // 8. Перемикач між відділами, фільтр наприклад [dev, qa, manager, hr] - [x] - Svitlana
 // 9. Переписати додавання юзера через форму, додати стейт для форми  - [x] - Kyrylo S
-// 10. Додати localStorage - [] - Tanya
-// 11. Додати тости для нотіфікацій - [] -
+// 10. Додати localStorage - [x] - Tanya
+// 11. Додати тости для нотіфікацій - [x] - Kyrylo S
 // 12. Створити модальне вікно - [] -
 // 13. Додати логіку для модального вікна - [] -
 // 14. Додати icons для кнопки edit, delete, search - [] -
@@ -31,15 +31,14 @@ class App extends React.Component {
 	}
 
 	componentDidUpdate(_, prevState) {
-	
-		window.localStorage.setItem('employees', JSON.stringify(this.state))	
+		window.localStorage.setItem('employees', JSON.stringify(this.state))
 	}
 
 	componentDidMount() {
 		const savedData = JSON.parse(window.localStorage.getItem('employees'))
 		// console.log(savedData);
 		if (savedData) {
-			this.setState({...savedData})
+			this.setState({ ...savedData })
 		}
 	}
 
