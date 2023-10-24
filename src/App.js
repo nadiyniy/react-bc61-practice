@@ -30,6 +30,19 @@ class App extends React.Component {
 		department: 'all',
 	}
 
+	componentDidUpdate(_, prevState) {
+		if (prevState.employees !== this.state.employees) {
+		window.localStorage.setItem('employees', JSON.stringify(this.state.employees))	
+		}
+	}
+
+	componentDidMount() {
+		const savedData = JSON.parse(window.localStorage.getItem('employees'))
+		if (savedData?.length) {
+			this.setState({employees: savedData})
+		}
+	}
+
 	handleDeleteUser = id => {
 		this.setState(prev => ({ employees: prev.employees.filter(user => user.id !== id) }))
 	}
