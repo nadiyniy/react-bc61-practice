@@ -1,5 +1,6 @@
 import React from "react";
 import { fetchProducts } from "./servises/apiJs";
+import { ProductItem } from "./components/ProductItem";
 //plan
 // https://dummyjson.com/products - api
 //https://dummyjson.com/products/search?q=phone - search api
@@ -12,17 +13,37 @@ import { fetchProducts } from "./servises/apiJs";
 // * Додати лоадери, нотіфікації
 
 class App extends React.Component {
+  state = {
+    loading: false,
+    products: [],
+    error: null,
+    query: "",
+  };
   async componentDidMount() {
+    this.setState({ loading: true });
     try {
       const { products } = await fetchProducts();
+      this.setState({ products });
       console.log(products);
     } catch (err) {
       console.log(err);
+    } finally {
+      this.setState({ loading: false });
     }
   }
 
   render() {
-    return <div></div>;
+    const { products } = this.state;
+    return (
+      <div>
+        <h1>Product list</h1>
+        <ul>
+          {products.map((item) => (
+            <ProductItem product={item} key={item.id} />
+          ))}
+        </ul>
+      </div>
+    );
   }
 }
 export default App;
