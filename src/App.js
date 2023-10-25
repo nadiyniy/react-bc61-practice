@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import { fetchProducts } from "./servises/apiJs";
 //plan
 // https://dummyjson.com/products - api
 //https://dummyjson.com/products/search?q=phone - search api
@@ -11,8 +12,17 @@ import React from 'react'
 // * Додати лоадери, нотіфікації
 
 class App extends React.Component {
-	render() {
-		return <div></div>
-	}
+  async componentDidMount() {
+    try {
+      const { products } = await fetchProducts();
+      console.log(products);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  render() {
+    return <div></div>;
+  }
 }
-export default App
+export default App;
