@@ -1,120 +1,84 @@
-import React from "react";
-import { Employees } from "./components/Employees/Employees";
-import { AddEmployee } from "./components/AddEmployee/AddEmployee";
-import { SearchUser } from "./components/SearchUser/SearchUser";
-import { Filter } from "./components/Filter/Filter";
-import { toast } from "react-toastify";
-
-//PLAN
-// 1. Зарефакторити app у классовий компонент, додати стейт для працівників - [x] - Vugar
-// 2. Створити компонент для відображення працівників, та компонент одного працівника - [x] - Anton
-// 3. Додати можливість додавання нових працівників - [x] - Kyrylo S
-// 4. Додати можливість видаляти існуючого працівника  - [x] - Kyrylo I
-// 5. Пошук по імені працівника - [x] - Vlad
-// 6. Заблокувати додавання однакових - [x] - Maria
-// 7. Додати можливість обрати відділ для працівника - [x] - Tanya
-// 8. Перемикач між відділами, фільтр наприклад [dev, qa, manager, hr] - [x] - Svitlana
-// 9. Переписати додавання юзера через форму, додати стейт для форми  - [x] - Kyrylo S
-// 10. Додати localStorage - [x] - Tanya
-// 11. Додати тости для нотіфікацій - [x] - Kyrylo S
-// 12. Створити модальне вікно - [] -
-// 13. Додати логіку для модального вікна - [] -
-// 14. Додати icons для кнопки edit, delete, search - [] -
-// 15. Використати модальне вікно для редагування юзера - [] -
+import React from 'react'
+import { Employees } from './components/Employees/Employees'
+import { AddEmployee } from './components/AddEmployee/AddEmployee'
+import { SearchUser } from './components/SearchUser/SearchUser'
+import { Filter } from './components/Filter/Filter'
+import { toast } from 'react-toastify'
 
 class App extends React.Component {
-  state = {
-    employees: [
-      { id: "1", name: "Alex", salary: 12000, position: "dev" },
-      { id: "2", name: "Anton", salary: 14000, position: "dev" },
-    ],
-    filter: "",
-    department: "all",
-  };
+	state = {
+		employees: [
+			{ id: '1', name: 'Alex', salary: 12000, position: 'dev' },
+			{ id: '2', name: 'Anton', salary: 14000, position: 'dev' },
+		],
+		filter: '',
+		department: 'all',
+	}
 
-  componentDidUpdate(_, prevState) {
-    window.localStorage.setItem("employees", JSON.stringify(this.state));
-  }
+	componentDidUpdate(_, prevState) {
+		window.localStorage.setItem('employees', JSON.stringify(this.state))
+	}
 
-  componentDidMount() {
-    const savedData = JSON.parse(window.localStorage.getItem("employees"));
-    // console.log(savedData);
-    if (savedData) {
-      this.setState({ ...savedData });
-    }
-  }
+	componentDidMount() {
+		const savedData = JSON.parse(window.localStorage.getItem('employees'))
+		if (savedData) {
+			this.setState({ ...savedData })
+		}
+	}
 
-  handleDeleteUser = (id) => {
-    this.setState((prev) => ({
-      employees: prev.employees.filter((user) => user.id !== id),
-    }));
-    toast.success(`Congratulations, you have deleted user`);
-  };
-  //users?.length
-  //null?.length => undefined
+	handleDeleteUser = id => {
+		this.setState(prev => ({
+			employees: prev.employees.filter(user => user.id !== id),
+		}))
+		toast.success(`Congratulations, you have deleted user`)
+	}
 
-  handleAddNewEmployee = (newData) => {
-    const { employees } = this.state;
-    const existingName = employees.find((item) => item.name === newData.name);
-    if (existingName) {
-      alert(`${newData.name} alredy exsists`);
-    } else {
-      const newUser = { id: crypto.randomUUID(), ...newData };
-      this.setState((prevState) => ({
-        employees: [...prevState.employees, newUser],
-      }));
-    }
-  };
+	handleAddNewEmployee = newData => {
+		const { employees } = this.state
+		const existingName = employees.find(item => item.name === newData.name)
+		if (existingName) {
+			alert(`${newData.name} alredy exsists`)
+		} else {
+			const newUser = { id: crypto.randomUUID(), ...newData }
+			this.setState(prevState => ({
+				employees: [...prevState.employees, newUser],
+			}))
+		}
+	}
 
-  handleChangeFilter = (e) => {
-    this.setState({ filter: e.target.value });
-  };
+	handleChangeFilter = e => {
+		this.setState({ filter: e.target.value })
+	}
 
-  getFilterData = () => {
-    return this.state.employees
-      .filter((user) =>
-        user.name.toLowerCase().includes(this.state.filter.toLowerCase())
-      )
-      .filter((user) =>
-        this.state.department === "all"
-          ? user
-          : user.position
-              .toLowerCase()
-              .includes(this.state.department.toLowerCase())
-      );
-  };
+	getFilterData = () => {
+		return this.state.employees
+			.filter(user => user.name.toLowerCase().includes(this.state.filter.toLowerCase()))
+			.filter(user =>
+				this.state.department === 'all'
+					? user
+					: user.position.toLowerCase().includes(this.state.department.toLowerCase())
+			)
+	}
 
-  handleChangeDepartment = (department) => {
-    this.setState({ department });
-    toast.info(`Congratulations, you have changed to ${department}`);
-  };
+	handleChangeDepartment = department => {
+		this.setState({ department })
+		toast.info(`Congratulations, you have changed to ${department}`)
+	}
 
-  render() {
-    const { employees } = this.state;
-    const filteredData = this.getFilterData();
-    const btns = [...new Set(employees.map((user) => user.position))];
-    // console.log(null?.length)
-    // console.log('12.5'?.toFixed?.())
-    console.log(1 || 0); // 1
-    console.log(0 || true); // true
-    console.log(0 || undefined); // undefined
-    console.log("====================");
-    console.log(1 ?? 0); // 1
-    console.log(0 ?? true); // 0
-    console.log(0 ?? undefined); // 0
-    console.log(0 ?? undefined ?? 1 ?? 1 ?? false); // 0
-    return (
-      <div>
-        <AddEmployee addUser={this.handleAddNewEmployee} />
-        <SearchUser setFilter={this.handleChangeFilter} />
-        <br />
-        <Filter onChangeDepartment={this.handleChangeDepartment} btns={btns} />
-        <Employees
-          deleteUser={this.handleDeleteUser}
-          dataEmployee={filteredData}
-        />
-      </div>
-    );
-  }
+	render() {
+		const { employees } = this.state
+		const filteredData = this.getFilterData()
+		const btns = [...new Set(employees.map(user => user.position))]
+
+		return (
+			<div>
+				<AddEmployee addUser={this.handleAddNewEmployee} />
+				<SearchUser setFilter={this.handleChangeFilter} />
+				<br />
+				<Filter onChangeDepartment={this.handleChangeDepartment} btns={btns} />
+				<Employees deleteUser={this.handleDeleteUser} dataEmployee={filteredData} />
+			</div>
+		)
+	}
 }
-export default App;
+export default App
