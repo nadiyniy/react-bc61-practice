@@ -1,69 +1,61 @@
-import React from 'react'
-import { fetchProducts } from './servises/apiJs'
-import { ProductItem } from './components/ProductItem'
-//plan
-// https://dummyjson.com/products - api
-//https://dummyjson.com/products/search?q=phone - search api
+import axios from 'axios'
+import React, { Component } from 'react'
+import { getData } from './servises/dummy'
+import Modal from './components/Modal'
 
-// 1. Створити апі і зробити запит за продуктами - [] - Mariia
-// 2. Додати верстку для відображення продуктів -[] - Vugar
-// 3. Зробити підгрузку - [] - Vlad
-// 4. Додати пошук -
-// 5. Вивести в модальне вікно зображення -
-// * Додати лоадери, нотіфікації
-
-class App extends React.Component {
+export default class App extends Component {
 	state = {
-		loading: false,
-		products: [],
-		error: null,
-		query: '',
-		skip: 0,
+		items: [],
+		isOpen: false,
+		selectedImg: '',
 	}
 	async componentDidMount() {
-		this.setState({ loading: true })
 		try {
-			const { products } = await fetchProducts()
-			this.setState({ products })
-			console.log(products)
-		} catch (err) {
-			console.log(err)
-		} finally {
-			this.setState({ loading: false })
-		}
-	}
-	async componentDidUpdate(prevProps, prevState) {
-		if (this.state.skip !== prevState.skip) {
-			this.setState({ loading: true })
-
-			try {
-				const { products } = await fetchProducts({ skip: this.state.skip })
-				this.setState(prev => ({ products: [...prev.products, ...products] }))
-			} catch (error) {
-				console.log(error)
-			} finally {
-				this.setState({ loading: false })
-			}
-		}
+			const data = await getData()
+			console.log(data)
+			this.setState({ items: data.products })
+		} catch (error) {}
 	}
 
-	handleLoadMore = () => {
-		this.setState(prev => ({ skip: prev.skip + 4 }))
+	openModal = () => {
+		this.setState({ isOpen: true })
+	}
+	closeModal = () => {
+		this.setState({ isOpen: false })
+	}
+	openModalWithImg = img => {
+		this.openModal()
+		this.setState({ selectedImg: img })
 	}
 
 	render() {
-		const { products } = this.state
+		const { isOpen, selectedImg } = this.state
 		return (
 			<div>
-				<h1>Product list</h1>
 				<ul>
-					{products.map(item => (
-						<ProductItem product={item} key={item.id} />
+					{this.state.items.map(item => (
+						<li>
+							<img src={item.thumbnail} onClick={() => this.openModalWithImg(item.thumbnail)} alt='safasdf' />
+						</li>
 					))}
 				</ul>
-				<button onClick={this.handleLoadMore}>load more</button>
+				<button onClick={this.openModal}>Open modal</button>
+				<button onClick={this.closeModal}>Close modal</button>
+				<div
+					style={{ width: '10vw', height: '10vh', background: 'black' }}
+					onClick={() => this.openModalWithImg('black')}
+				></div>
+				<div
+					style={{ width: '10vw', height: '10vh', background: 'violet' }}
+					onClick={() => this.openModalWithImg('violet')}
+				></div>
+
+				{isOpen && (
+					<Modal closeModal={this.closeModal}>
+						<img src={selectedImg} />
+					</Modal>
+				)}
 			</div>
 		)
 	}
 }
-export default App
