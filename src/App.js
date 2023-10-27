@@ -4,14 +4,6 @@ import { ProductItem } from "./components/ProductItem";
 import { async } from "q";
 
 const App = () => {
-  // state = {
-  // 	loading: false,
-  // 	products: [],
-  // 	error: null,
-  // 	query: '',
-  // 	skip: 0,
-  // }
-
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
