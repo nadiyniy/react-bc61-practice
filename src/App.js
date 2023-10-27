@@ -1,16 +1,6 @@
 import React from 'react'
 import { fetchProducts } from './servises/apiJs'
 import { ProductItem } from './components/ProductItem'
-//plan
-// https://dummyjson.com/products - api
-//https://dummyjson.com/products/search?q=phone - search api
-
-// 1. Створити апі і зробити запит за продуктами - [] - Mariia
-// 2. Додати верстку для відображення продуктів -[] - Vugar
-// 3. Зробити підгрузку - [] - Vlad
-// 4. Додати пошук -
-// 5. Вивести в модальне вікно зображення -
-// * Додати лоадери, нотіфікації
 
 class App extends React.Component {
 	state = {
