@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Employees } from "./components/Employees/Employees";
 import { AddEmployee } from "./components/AddEmployee/AddEmployee";
 import { SearchUser } from "./components/SearchUser/SearchUser";
@@ -45,7 +45,7 @@ const App = () => {
   const handleAddNewEmployee = (newData) => {
     const existingName = employees.find((item) => item.name === newData.name);
     if (existingName) {
-      alert(`${newData.name} alredy exsists`);
+      alert(`${newData.name} already exsists`);
     } else {
       const newUser = { id: crypto.randomUUID(), ...newData };
       dispatch({ type: "addUser", payload: newUser });
