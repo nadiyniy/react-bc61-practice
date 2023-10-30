@@ -15,7 +15,7 @@ const App = () => {
   const [employees, setEmployees] = useState([]);
   const [filter, setFilter] = useState("");
   const [department, setDepartment] = useState("");
-  const { login, logout, user } = useContext(UserContext);
+  const { login, logout, user, isLogin } = useContext(UserContext);
   useEffect(() => {
     const savedData = JSON.parse(window.localStorage.getItem("employees"));
     if (savedData?.length) {
@@ -62,8 +62,11 @@ const App = () => {
     <div>
       <AddEmployee addUser={handleAddNewEmployee} />
       <SearchUser setFilter={handleChangeFilter} />
-      <button onClick={() => login("Andre")}>enter</button>
-      <button onClick={logout}>exit</button>
+      {isLogin ? (
+        <button onClick={logout}>exit</button>
+      ) : (
+        <button onClick={() => login("Andre")}>enter</button>
+      )}
 
       {user && <h1>Welcome {user}</h1>}
       <br />
