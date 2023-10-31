@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { Route, Router, Routes } from 'react-router-dom';
+import Home from './page/Home';
+import About from './page/About';
 
 // PLAN
 // - Підключити роутінг, додати BrowserRouter, Routes, Route
@@ -7,7 +10,12 @@ import React from 'react'
 // - Зробити вкладені маршрути
 
 const App = () => {
-	return <div>App</div>
-}
+	return (
+		<Routes>
+			<Route path='/' element={<Home />} />
+			<Route path='/about' element={<About />} />
+		</Routes>
+	);
+};
 
-export default App
+export default App;
