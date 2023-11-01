@@ -12,10 +12,10 @@ import Mission from './components/Mission'
 // - Створити роут для 404 - Vugar
 // - Додати Navbar з Navlink - Olena
 // - Зробити вкладені маршрути - Maria
-// - Зробити запит за даними і відмалювати розмітку
+// - Зробити запит за даними і відмалювати розмітку - Kyrylo
 // - Зробити кнопку назад useRef
 // - Використати useSearchParams для пошуку
-// - Додати lazy
+// - Додати lazy - Tanya
 
 const App = () => {
 	return (
