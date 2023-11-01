@@ -1,10 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const SinglPost = () => {
+  const location = useLocation();
+  console.log(location);
+  const goBackRef = useRef(location.state?.from || "/posts");
+
   return (
     <div>
-      <Link to="/posts">Go back</Link>
+      <Link to={goBackRef.current}>Go back</Link>
     </div>
   );
 };
