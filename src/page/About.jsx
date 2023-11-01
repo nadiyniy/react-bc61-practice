@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Navigate, Outlet, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -18,7 +18,9 @@ const About = () => {
 
       <StyledLink to="company">Info about company</StyledLink>
       <StyledLink to="mission">About our mission</StyledLink>
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </StyledWrapper>
   );
 };

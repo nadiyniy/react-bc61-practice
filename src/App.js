@@ -1,14 +1,18 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "./page/Home";
-import About from "./page/About";
+// import Home from "./page/Home";
+// import About from "./page/About";
 import NotFound from "./page/NotFound";
 import { Layout } from "./components/Layout";
-import Company from "./components/Company";
-import Mission from "./components/Mission";
+// import Company from "./components/Company";
+// import Mission from "./components/Mission";
 import { Posts } from "./page/Posts";
 import SinglPost from "./page/SinglPost";
 
+const Home = lazy(() => import("./page/Home"));
+const About = lazy(() => import("./page/About"));
+const Company = lazy(() => import("./components/Company"));
+const Mission = lazy(() => import("./components/Mission"));
 // PLAN
 // - Підключити роутінг, додати BrowserRouter, Routes, Route - Vlad
 // - Створити роут для 404 - Vugar
