@@ -7,6 +7,7 @@ import { Layout } from "./components/Layout";
 import Company from "./components/Company";
 import Mission from "./components/Mission";
 import { Posts } from "./page/Posts";
+import SinglPost from "./page/SinglPost";
 
 // PLAN
 // - Підключити роутінг, додати BrowserRouter, Routes, Route - Vlad
@@ -24,6 +25,7 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="posts" element={<Posts />} />
+        <Route path="posts/:id" element={<SinglPost />} />
         <Route path="about" element={<About />}>
           <Route path="company" element={<Company />} />
           <Route path="mission" element={<Mission />} />
