@@ -1,0 +1,1 @@
+export const COUNT_PRODUCTS = "COUNT_PRODUCTS";
