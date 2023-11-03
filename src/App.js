@@ -1,55 +1,21 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectTodo } from './Redux/ToDoList/selectors';
-import { addTodo, changeTodo, deleteTodo, toggleTodo } from './Redux/ToDoList/actions';
+import React from 'react'
+import { ItemCard } from './components/ItemCard'
 
 const App = () => {
-	const todos = useSelector(selectTodo);
-	const dispatch = useDispatch();
-
-	const { register, handleSubmit } = useForm();
-	const submit = (data) => {
-		dispatch(addTodo(data.text));
-	};
-
-	//Plan
-
-	//  Створити редьюсер
-	//  Створити стор
-	//  Створити екшени та константи
-	//  Підключити редакс до проекта та витягнути дані
-	//  Піти на вихідні)
-	const handleDelete = (id) => {
-		dispatch(deleteTodo(id));
-	};
-	const handleChangeText = (id) => {
-		dispatch(changeTodo({ text: 'Hello World!', id }));
-	};
-
 	return (
 		<div>
-			<form onSubmit={handleSubmit(submit)}>
-				<input {...register('text')} type='text' />
-				<button>Add</button>
-			</form>
-			<ul>
-				{todos.map((todo) => (
-					<li key={todo.id}>
-						<input
-							type='checkbox'
-							onChange={() => {
-								dispatch(toggleTodo(todo.id));
-							}}
-							checked={todo.completed}
-						/>
-						<span onClick={() => handleChangeText(todo.id)}> {todo.todo}</span>
-						<button onClick={() => handleDelete(todo.id)}>delete</button>
-					</li>
-				))}
-			</ul>
+			<header className='bg-teal-500 flex justify-between px-10 py-4 font-bold text-3xl text-white items-center '>
+				<div>LOGO</div>
+				<button className='border-2 border-black text-2xl px-4 py-2 rounded-md'>Cart</button>
+			</header>
+			<main className='px-10 py-8'>
+				<h1 className='font-bold text-center text-4xl border-b-2 border-black mb-4'>Product store</h1>
+				<ul className='grid grid-cols-3 mx-auto list-none p-0 m-0 justify-center gap-4'>
+					<ItemCard />
+				</ul>
+			</main>
 		</div>
-	);
-};
+	)
+}
 
-export default App;
+export default App
