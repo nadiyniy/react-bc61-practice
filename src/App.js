@@ -1,8 +1,13 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
 const App = () => {
+	const { register, handleSubmit } = useForm()
+	const submit = data => {
+		console.log(data)
+	}
 	//Plan
-	//  Створити розмітку для майбутнього проекту todo list
+
 	//  Створити редьюсер
 	//  Створити стор
 	//  Створити екшени та константи
@@ -10,9 +15,18 @@ const App = () => {
 	//  Піти на вихідні)
 	return (
 		<div>
-			{/* Тут буде форма додавання туду */}
-			{/* Тут буде фільтр для туду */}
-			{/* Тут буде розмітка самих туду */}
+			<form onSubmit={handleSubmit(submit)}>
+				<input {...register('text')} type='text' />
+				<button>Add</button>
+			</form>
+			<ul>
+				<li>
+					1 <button>delete</button>
+				</li>
+				<li>
+					2 <button>delete</button>
+				</li>
+			</ul>
 		</div>
 	)
 }
