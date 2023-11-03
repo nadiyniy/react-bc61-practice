@@ -1,4 +1,4 @@
-import { DELETE_TODO, TOGGLE_TODO } from "./consts";
+import { ADD_TODO, DELETE_TODO, TOGGLE_TODO } from "./consts";
 
 const initialState = {
   todos: [
@@ -24,6 +24,12 @@ export const toDoReducer = (state = initialState, action) => {
             ? { ...todo, completed: !todo.completed }
             : todo
         ),
+      };
+    }
+    case ADD_TODO: {
+      return {
+        ...state,
+        todos: [...state.todos, action.payload],
       };
     }
 

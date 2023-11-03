@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTodo } from "./Redux/ToDoList/selectors";
 import { DELETE_TODO } from "./Redux/ToDoList/consts";
-import { deleteTodo, toggleTodo } from "./Redux/ToDoList/actions";
+import { addTodo, deleteTodo, toggleTodo } from "./Redux/ToDoList/actions";
 
 const App = () => {
   const todos = useSelector(selectTodo);
@@ -11,7 +11,7 @@ const App = () => {
 
   const { register, handleSubmit } = useForm();
   const submit = (data) => {
-    console.log(data);
+    dispatch(addTodo(data.text));
   };
 
   //Plan
@@ -41,7 +41,7 @@ const App = () => {
               }}
               checked={todo.completed}
             />
-            {todo.todo} 1{" "}
+            {todo.todo}{" "}
             <button onClick={() => handleDelete(todo.id)}>delete</button>
           </li>
         ))}
