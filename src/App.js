@@ -4,6 +4,12 @@ import { Booklist } from './components/Booklist'
 import { Route, Routes } from 'react-router-dom'
 import { Favorite } from './components/Favorite'
 import { Header } from './components/Header'
+
+// Plan
+// Додати редакс в проект. Створити слайс книжок, відмалювати дані, створити стор
+// Додати слайс улюблених. Додати можливість видалення / додавання в стор
+// Додати пошук по улюбленим
+// Додати персіст
 const App = () => {
 	return (
 		<div>
