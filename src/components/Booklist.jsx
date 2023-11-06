@@ -10,7 +10,7 @@ export const Booklist = () => {
 
   const handleAddBook = (dataBook) => {
     dispatch(addBook(dataBook));
-    toast.success("You have added book to Favourites succesfully");
+    toast.success("You have added book to Favourites successfully");
   };
 
   return (
