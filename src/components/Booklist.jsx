@@ -1,9 +1,17 @@
 import React from "react";
 import { selectBooks } from "../redux/bookList/selectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addBook } from "../redux/FavouritesSlice";
+import { toast } from "react-toastify";
 
 export const Booklist = () => {
   const books = useSelector(selectBooks);
+  const dispatch = useDispatch();
+
+  const handleAddBook = (dataBook) => {
+    dispatch(addBook(dataBook));
+    toast.success("You have added book to Favourites succesfully");
+  };
 
   return (
     <div>
@@ -17,7 +25,7 @@ export const Booklist = () => {
           <li>
             <h2>{item.title} </h2>
             <h4>{item.author}</h4>
-            <button>Add to favorite</button>
+            <button onClick={() => handleAddBook(item)}>Add to favorite</button>
           </li>
         ))}
       </ul>
