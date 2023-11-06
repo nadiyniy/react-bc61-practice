@@ -1,24 +1,39 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFavouritesBooks } from "../redux/bookList/selectors";
+import {
+  selectFavouritesBooks,
+  selectFilter,
+} from "../redux/bookList/selectors";
 import { deleteBook } from "../redux/FavouritesSlice";
 import { toast } from "react-toastify";
+import { setFilter } from "../redux/filterSlice";
 
 export const Favorite = ({ data = [] }) => {
   const favouritesBooks = useSelector(selectFavouritesBooks);
   const dispatch = useDispatch();
-
+  const filter = useSelector(selectFilter);
   const handleDeleteBook = (id) => {
     dispatch(deleteBook(id));
     toast.info("You have deleted book from Favourites");
   };
-
+  const getFilteredData = () => {
+    return favouritesBooks.filter((item) =>
+      item.title.toLowerCase().includes(filter.toLowerCase().trim())
+    );
+  };
   return (
     <div>
       <h2>Favorite</h2>
-      <input type="text" placeholder="Search by title" />
+      <input
+        type="text"
+        value={filter}
+        onChange={(e) => {
+          dispatch(setFilter(e.target.value));
+        }}
+        placeholder="Search by title"
+      />
       <ul>
-        {favouritesBooks.map((item) => (
+        {getFilteredData()?.map((item) => (
           <li>
             <h2>{item.title} </h2>
             <h4>{item.author}</h4>
