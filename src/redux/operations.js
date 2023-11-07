@@ -14,3 +14,25 @@ export const fetchFavoritesThunk = createAsyncThunk(
     }
   }
 );
+export const addToFavoriteThunk = createAsyncThunk(
+  "addFavorite",
+  async (body, thunkApi) => {
+    try {
+      const { data } = await axios.post("favorites", body);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+export const deleteFromFavorite = createAsyncThunk(
+  "deleteFavorite",
+  async (id, thunkApi) => {
+    try {
+      const { data } = await axios.delete(`favorites/${id}`);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

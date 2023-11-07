@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { removeToTrash } from "./trashSlice";
-import { fetchFavoritesThunk } from "./operations";
+import {
+  addToFavoriteThunk,
+  deleteFromFavorite,
+  fetchFavoritesThunk,
+} from "./operations";
 
 const initialState = {
   books: [],
@@ -26,6 +30,14 @@ const favouritesSlice = createSlice({
       })
       .addCase(fetchFavoritesThunk.fulfilled, (state, { payload }) => {
         state.books = payload;
+        state.loading = false;
+      })
+      .addCase(addToFavoriteThunk.fulfilled, (state, { payload }) => {
+        state.books.push(payload);
+        state.loading = false;
+      })
+      .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
+        state.books = state.books.filter((item) => item.id !== payload.id);
         state.loading = false;
       });
   },

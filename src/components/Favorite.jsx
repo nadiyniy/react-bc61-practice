@@ -7,14 +7,14 @@ import {
 import { deleteBook } from "../redux/FavouritesSlice";
 import { toast } from "react-toastify";
 import { setFilter } from "../redux/filterSlice";
-import { fetchFavoritesThunk } from "../redux/operations";
+import { deleteFromFavorite, fetchFavoritesThunk } from "../redux/operations";
 
 export const Favorite = ({ data = [] }) => {
   const favouritesBooks = useSelector(selectFavouritesBooks);
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
   const handleDeleteBook = (id) => {
-    dispatch(deleteBook(id));
+    dispatch(deleteFromFavorite(id));
     toast.info("You have deleted book from Favourites");
   };
   const getFilteredData = () => {

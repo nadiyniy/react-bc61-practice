@@ -6,13 +6,14 @@ import { toast } from "react-toastify";
 import { removeToTrash } from "../redux/trashSlice";
 import { useForm } from "react-hook-form";
 import { addNewBook } from "../redux/bookList/booksSlice";
+import { addToFavoriteThunk } from "../redux/operations";
 
 export const Booklist = () => {
   const books = useSelector(selectBooks);
   const dispatch = useDispatch();
 
   const handleAddBook = (dataBook) => {
-    dispatch(addBook(dataBook));
+    dispatch(addToFavoriteThunk(dataBook));
     toast.success("You have added book to Favourites successfully");
   };
 
