@@ -7,10 +7,12 @@ import { Header } from './components/Header'
 import Trash from './page/Trash'
 
 // Plan
-// Міграція на mockapi
-// Створення operations
-// Додати лоадери, еррори
-//
+
+// Зробити createSelector для фільтра
+// Додати мокапі для архіва
+// Перевезти дані в мокапі
+// Зробити модалку для додавання книги
+// Зробити роути для додавання книги
 
 const App = () => {
 	return (
