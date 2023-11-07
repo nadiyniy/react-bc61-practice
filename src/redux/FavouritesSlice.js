@@ -38,24 +38,14 @@ const favouritesSlice = createSlice({
 				state.loading = false;
 			})
 			.addMatcher(
-				isAnyOf(
-					removeToTrash.pending,
-					fetchFavoritesThunk.pending,
-					addToFavoriteThunk.pending,
-					deleteFromFavorite.pending
-				),
+				isAnyOf(fetchFavoritesThunk.pending, addToFavoriteThunk.pending, deleteFromFavorite.pending),
 				(state, { payload }) => {
 					state.loading = true;
 					state.error = null;
 				}
 			)
 			.addMatcher(
-				isAnyOf(
-					removeToTrash.rejected,
-					fetchFavoritesThunk.rejected,
-					addToFavoriteThunk.rejected,
-					deleteFromFavorite.rejected
-				),
+				isAnyOf(fetchFavoritesThunk.rejected, addToFavoriteThunk.rejected, deleteFromFavorite.rejected),
 				(state, { payload }) => {
 					state.loading = false;
 					state.error = payload;

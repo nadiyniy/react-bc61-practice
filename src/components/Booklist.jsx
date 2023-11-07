@@ -29,7 +29,7 @@ export const Booklist = () => {
 		return dispatch(addNewBook({ name, author }));
 	};
 	useEffect(() => {
-		toast.error(error);
+		if (error) toast.error(error);
 	}, [error]);
 
 	return (

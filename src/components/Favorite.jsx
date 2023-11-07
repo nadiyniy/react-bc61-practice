@@ -28,7 +28,9 @@ export const Favorite = ({ data = [] }) => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		toast.error(error);
+		if (error && !loading) {
+			toast.error(error);
+		}
 	}, [error]);
 
 	return (
