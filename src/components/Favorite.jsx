@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectFavouritesBooks,
@@ -7,6 +7,7 @@ import {
 import { deleteBook } from "../redux/FavouritesSlice";
 import { toast } from "react-toastify";
 import { setFilter } from "../redux/filterSlice";
+import { fetchFavoritesThunk } from "../redux/operations";
 
 export const Favorite = ({ data = [] }) => {
   const favouritesBooks = useSelector(selectFavouritesBooks);
@@ -21,6 +22,9 @@ export const Favorite = ({ data = [] }) => {
       item.title.toLowerCase().includes(filter.toLowerCase().trim())
     );
   };
+  useEffect(() => {
+    dispatch(fetchFavoritesThunk());
+  }, [dispatch]);
   return (
     <div>
       <h2>Favorite</h2>
