@@ -36,3 +36,17 @@ export const deleteFromFavorite = createAsyncThunk(
     }
   }
 );
+
+export const fetchArchive = createAsyncThunk(
+  "removeToArchive",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axios.get(
+        "https://654a3566e182221f8d52babf.mockapi.io/archive"
+      );
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
