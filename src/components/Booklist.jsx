@@ -1,18 +1,5 @@
 import React, { useEffect } from "react";
-import { selectBooks, selectError, selectLoading } from "../Redux/selectors";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { removeToTrash } from "../Redux/trashSlice";
-import { useForm } from "react-hook-form";
-import { addNewBook } from "../Redux/bookList/booksSlice";
-import { addToFavoriteThunk } from "../Redux/operations";
-import { Loader } from "./loader";
-import React, { useEffect } from "react";
-import {
-  selectBooks,
-  selectError,
-  selectLoading,
-} from "../redux/bookList/selectors";
+import { selectBooks, selectError, selectLoading } from "../redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { removeToTrash } from "../redux/trashSlice";

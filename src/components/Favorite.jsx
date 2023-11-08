@@ -4,7 +4,7 @@ import {
   selectFilter,
   selectFilteredData,
   selectLoading,
-} from "../redux/bookList/selectors";
+} from "../redux/selectors";
 import { toast } from "react-toastify";
 import { setFilter } from "../redux/filterSlice";
 import { deleteFromFavorite, fetchFavoritesThunk } from "../redux/operations";
