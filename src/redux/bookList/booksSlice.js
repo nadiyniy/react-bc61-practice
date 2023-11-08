@@ -1,6 +1,7 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 import booksData from "../../assets/books.json";
 import { removeToTrash } from "../trashSlice";
+import { addBookToArchive } from "../operations";
 
 const prepareAdd = ({ name, author }) => {
   return {
@@ -29,8 +30,11 @@ export const bookSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(removeToTrash, (state, { payload }) => {
-      state.books = state.books.filter((item) => item.id !== payload.id);
+    builder.addCase(addBookToArchive.fulfilled, (state, { payload }) => {
+      state.books = state.books.filter((item) => {
+        console.log(item.id);
+        return item._id !== payload._id;
+      });
     });
   },
 });

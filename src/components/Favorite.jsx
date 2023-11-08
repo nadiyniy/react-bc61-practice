@@ -39,7 +39,7 @@ export const Favorite = ({ data = [] }) => {
       {loading && <Loader />}
       <ul>
         {favouritesBooks?.map((item) => (
-          <li key={item.id}>
+          <li key={item._id}>
             <h2>{item.title} </h2>
             <h4>{item.author}</h4>
             <button onClick={() => handleDeleteBook(item.id)}>

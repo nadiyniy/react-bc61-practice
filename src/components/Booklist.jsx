@@ -5,8 +5,9 @@ import { toast } from "react-toastify";
 import { removeToTrash } from "../redux/trashSlice";
 import { useForm } from "react-hook-form";
 import { addNewBook } from "../redux/bookList/booksSlice";
-import { addToFavoriteThunk } from "../redux/operations";
+import { addBookToArchive, addToFavoriteThunk } from "../redux/operations";
 import { Loader } from "./loader";
+import { nanoid } from "@reduxjs/toolkit";
 
 export const Booklist = () => {
   const books = useSelector(selectBooks);
@@ -20,7 +21,8 @@ export const Booklist = () => {
   };
 
   const handleRemove = (item) => {
-    dispatch(removeToTrash(item));
+    // dispatch(removeToTrash(item));
+    dispatch(addBookToArchive(item));
   };
 
   const { handleSubmit, register } = useForm();
@@ -50,7 +52,7 @@ export const Booklist = () => {
 
       <ul>
         {books.map((item) => (
-          <li key={item.id}>
+          <li key={item._id}>
             <h2>{item.title} </h2>
             <h4>{item.author}</h4>
             <button onClick={() => handleAddBook(item)}>Add to favorite</button>

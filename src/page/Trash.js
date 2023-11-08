@@ -14,7 +14,7 @@ const Trash = () => {
   return (
     <ul>
       {trashList.map((item) => (
-        <li key={item.id}>
+        <li key={item._id}>
           {item.title} <span>{item.deletedAt}</span>
           <button onClick={() => dispatch(deleteOneBookFromArchive(item.id))}>
             Delete from archive

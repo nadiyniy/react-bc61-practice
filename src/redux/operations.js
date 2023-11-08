@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import moment from "moment";
 
 axios.defaults.baseURL = "https://6549fab3e182221f8d524207.mockapi.io";
 
@@ -58,6 +59,22 @@ export const deleteOneBookFromArchive = createAsyncThunk(
   async (id, thunkApi) => {
     try {
       const { data } = await instance.delete(`archive/${id}`);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addBookToArchive = createAsyncThunk(
+  "addToArchive",
+  async (body, thunkApi) => {
+    try {
+      const expandedBody = {
+        ...body,
+        deletedAt: moment().format("DD.MM.YYYY HH.MM.SS"),
+      };
+      const { data } = await instance.post(`archive`, expandedBody);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
