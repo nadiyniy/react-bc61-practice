@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectFavouritesBooks, selectFilter, selectLoading } from '../Redux/bookList/selectors'
+import { selectFavouritesBooks, selectFilter, selectLoading } from '../Redux/selectors'
 import { toast } from 'react-toastify'
 import { setFilter } from '../Redux/filterSlice'
 import { deleteFromFavorite, fetchFavoritesThunk } from '../Redux/operations'

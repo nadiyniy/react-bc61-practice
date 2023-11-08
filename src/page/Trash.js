@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectTrash } from '../Redux/bookList/selectors'
+import { selectTrash } from '../Redux/selectors'
 
 const Trash = () => {
 	const trashList = useSelector(selectTrash)

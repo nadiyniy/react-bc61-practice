@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { selectBooks, selectError, selectLoading } from '../Redux/bookList/selectors'
+import { selectBooks, selectError, selectLoading } from '../Redux/selectors'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { removeToTrash } from '../Redux/trashSlice'
