@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
-import { fetchArchive } from "./operations";
+import { deleteOneBookFromArchive, fetchArchive } from "./operations";
 
 const initialState = {
   items: [],
@@ -26,9 +26,14 @@ export const trashSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchArchive.fulfilled, (state, { payload }) => {
-      state.items = payload;
-    });
+    builder
+      .addCase(fetchArchive.fulfilled, (state, { payload }) => {
+        state.items = payload;
+      })
+      .addCase(deleteOneBookFromArchive.fulfilled, (state, { payload }) => {
+        const index = state.items.findIndex((item) => item.id === payload.id);
+        state.items.splice(index, 1);
+      });
   },
 });
 
