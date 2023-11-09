@@ -4,14 +4,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPostThunk } from "../redux/posts/operations";
 import moment from "moment/moment";
 import { selectUser } from "../redux/user/selector";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Form = () => {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const { name } = useSelector(selectUser);
+  const navigate = useNavigate();
 
-  const submit = (data) => {
-    dispatch(addPostThunk({ ...data, createdAt: moment(), owner: name }));
+  const submit = async (data) => {
+    try {
+      await dispatch(
+        addPostThunk({ ...data, createdAt: moment(), owner: name })
+      ).unwrap();
+      navigate("/");
+    } catch (error) {
+      toast.error("Server is dead");
+    }
+    // dispatch(addPostThunk({ ...data, createdAt: moment(), owner: name }))
+    //   .unwrap()
+    //   .then(() => navigate("/"))
+    //   .catch(() => toast.error("Server is dead"));
+    // navigate("/");
     reset();
   };
 

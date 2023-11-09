@@ -2,14 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submit = ({ name }) => {
     dispatch(setUser(name));
     reset();
+    navigate("/");
   };
 
   return (
