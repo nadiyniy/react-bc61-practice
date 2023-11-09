@@ -10,7 +10,6 @@ import { Home } from './pages/Home'
 // Організувати перехід на readMore. Дивитись коментарі для поста
 //
 export const App = () => {
-	const posts = [{ id: '1', title: 'Hello', body: 'Lorem ipsum' }]
 	return (
 		<>
 			<Home />
