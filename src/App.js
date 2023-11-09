@@ -1,5 +1,8 @@
-import React from "react";
-import { Home } from "./pages/Home";
+import React, { useEffect } from 'react';
+import { Home } from './pages/Home';
+import { useDispatch } from 'react-redux';
+import { selectPosts } from './redux/posts/selectors';
+import { fetchPostsThunk } from './redux/posts/operations';
 
 // Створити редакс папки , додати слайс постів, додати стор, підключити редакс
 // Додати селектори, витягнути дані з через редакс, додати operations, підключити mockapi
@@ -10,9 +13,15 @@ import { Home } from "./pages/Home";
 // Організувати перехід на readMore. Дивитись коментарі для поста
 //
 export const App = () => {
-  return (
-    <>
-      <Home />
-    </>
-  );
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchPostsThunk());
+	}, [dispatch]);
+
+	return (
+		<>
+			<Home />
+		</>
+	);
 };
