@@ -1,5 +1,5 @@
-import React from 'react'
-import { Home } from './pages/Home'
+import React from "react";
+import { Home } from "./pages/Home";
 
 // Створити редакс папки , додати слайс постів, додати стор, підключити редакс
 // Додати селектори, витягнути дані з через редакс, додати operations, підключити mockapi
@@ -10,9 +10,9 @@ import { Home } from './pages/Home'
 // Організувати перехід на readMore. Дивитись коментарі для поста
 //
 export const App = () => {
-	return (
-		<>
-			<Home />
-		</>
-	)
-}
+  return (
+    <>
+      <Home />
+    </>
+  );
+};
