@@ -1,21 +1,25 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
-import { loginThunk } from "../redux/auth/operation";
+import { registerThunk } from "../redux/auth/operation";
 
-const LoginForm = () => {
+export const Register = () => {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const submit = (data) => {
-    dispatch(loginThunk(data));
+    dispatch(registerThunk(data));
   };
 
   return (
     <form action="" onSubmit={handleSubmit(submit)}>
+      <input
+        type="text"
+        {...register("name", { required: true })}
+        placeholder="Enter name"
+      />
       <input
         type="text"
         {...register("email", { required: true })}
@@ -30,5 +34,3 @@ const LoginForm = () => {
     </form>
   );
 };
-
-export default LoginForm;
