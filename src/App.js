@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
-import { Home } from './pages/Home'
-import { useDispatch } from 'react-redux'
-import { fetchPostsThunk } from './redux/posts/operations'
-import { Route, Routes } from 'react-router-dom'
-import { Layout } from './components/Layout'
-import LoginForm from './components/LoginForm'
-import { Login } from './pages/Login'
-import { NotFound } from './pages/NotFound'
-import { AddPost } from './pages/AddPost'
-import { Register } from './components/Register'
+import React, { useEffect } from "react";
+import { Home } from "./pages/Home";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPostsThunk } from "./redux/posts/operations";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import LoginForm from "./components/LoginForm";
+import { Login } from "./pages/Login";
+import { NotFound } from "./pages/NotFound";
+import { AddPost } from "./pages/AddPost";
+import { Register } from "./components/Register";
+import { selectIsRefresh } from "./redux/auth/selectors";
+import { refreshThunk } from "./redux/auth/operation";
 
 // Створити редакс папки , додати слайс постів, додати стор, підключити редакс - [x] -
 // Додати селектори, витягнути дані з через редакс, додати operations, підключити mockapi - [x] -
@@ -24,23 +26,27 @@ import { Register } from './components/Register'
 // Зробити фільтр по авторам -
 // Зробити неможливість редагування та видалення чужих постів -
 export const App = () => {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const refresh = useSelector(selectIsRefresh);
 
-	useEffect(() => {
-		dispatch(fetchPostsThunk())
-	}, [dispatch])
-
-	return (
-		<>
-			<Routes>
-				<Route path='/' element={<Layout />}>
-					<Route index element={<Home />} />
-					<Route path='addPost' element={<AddPost />} />
-					<Route path='login' element={<Login />} />
-					<Route path='register' element={<Register />} />
-				</Route>
-				<Route path='*' element={<NotFound />}></Route>
-			</Routes>
-		</>
-	)
-}
+  useEffect(() => {
+    dispatch(fetchPostsThunk());
+    dispatch(refreshThunk());
+  }, [dispatch]);
+  console.log(refresh);
+  return refresh ? (
+    <p>Loading...</p>
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="addPost" element={<AddPost />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
+    </>
+  );
+};
